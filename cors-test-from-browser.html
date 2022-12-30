@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+        <body>
+                <input id='url' placeholder='http://example.com' onkeyup='setURL()'/>
+                <input id='method' placeholder='options' onkeyup='setMETHOD()'/>
+                <button onclick="sendRequest()">Send Request</button>
+
+        <script type="text/javascript">
+                let url = 'http://example.com';
+                let method = 'options';
+
+                function setURL() {
+                         url = document.getElementById('url').value;
+                }
+
+                function setMETHOD() {
+                        method = document.getElementById('method').value;
+                }
+
+                function sendRequest() {
+                        let client = new XMLHttpRequest();
+                        client.open(method, url);
+                        client.send();
+                        client.addEventListener("readystatechange", () => {
+                                if(client.readyState == 4) {
+                                        console.log(client.getAllResponseHeaders());
+                                        console.log(client.responseText);
+                                }
+                        });
+                }
+        </script>
+        </body>
+</html>
